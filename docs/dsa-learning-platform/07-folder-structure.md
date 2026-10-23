@@ -1,0 +1,258 @@
+# Folder Structure
+
+## 1. Repository layout
+
+```text
+dsa-platform/
+  apps/
+    web/
+    api/
+    judge-worker/
+    ai-worker/
+  packages/
+    shared/
+    ui/
+    config/
+  database/
+    migrations/
+    seeds/
+    fixtures/
+  infra/
+    docker/
+    terraform/
+  docs/
+```
+
+## 2. Next.js frontend
+
+```text
+apps/web/
+  app/
+    (marketing)/
+      page.tsx
+      curriculum/page.tsx
+    (auth)/
+      login/page.tsx
+      register/page.tsx
+      callback/page.tsx
+    (learn)/
+      roadmap/page.tsx
+      topics/[topicSlug]/page.tsx
+      lessons/[lessonSlug]/page.tsx
+    (practice)/
+      problems/page.tsx
+      problems/[problemSlug]/page.tsx
+      submissions/[submissionId]/page.tsx
+    (dashboard)/
+      dashboard/page.tsx
+      analytics/page.tsx
+      badges/page.tsx
+      leaderboard/page.tsx
+    admin/
+      topics/page.tsx
+      lessons/page.tsx
+      problems/page.tsx
+      analytics/page.tsx
+    api/
+      auth/[...nextauth]/route.ts
+    layout.tsx
+    globals.css
+  components/
+    auth/
+    editor/
+    lessons/
+    problems/
+    progress/
+    quizzes/
+    simulations/
+    ui/
+  hooks/
+  lib/
+    api/
+    auth/
+    editor/
+    formatters/
+    validators/
+  providers/
+  styles/
+  tests/
+  next.config.ts
+  package.json
+  tsconfig.json
+```
+
+## 3. Node.js backend
+
+```text
+apps/api/
+  src/
+    index.ts
+    app.ts
+    config/
+      env.ts
+      logger.ts
+    modules/
+      auth/
+        auth.controller.ts
+        auth.routes.ts
+        auth.service.ts
+      users/
+        user.repository.ts
+        user.service.ts
+      curriculum/
+        topic.repository.ts
+        lesson.repository.ts
+        curriculum.service.ts
+        curriculum.routes.ts
+      problems/
+        problem.repository.ts
+        problem.service.ts
+        problem.routes.ts
+      submissions/
+        submission.repository.ts
+        submission.service.ts
+        submission.routes.ts
+      progress/
+        progress.repository.ts
+        progress.service.ts
+        progress.routes.ts
+      assessments/
+        assessment.repository.ts
+        assessment.service.ts
+        assessment.routes.ts
+      badges/
+        badge.repository.ts
+        badge.service.ts
+      analytics/
+        analytics.repository.ts
+        analytics.service.ts
+        analytics.routes.ts
+      ai-tutor/
+        ai-tutor.service.ts
+        retrieval.service.ts
+        prompt-templates.ts
+        ai-tutor.routes.ts
+    middleware/
+      authenticate.ts
+      authorize.ts
+      error-handler.ts
+      rate-limit.ts
+      request-id.ts
+      validate.ts
+    db/
+      pool.ts
+      transaction.ts
+      repositories/
+    queues/
+      submission.queue.ts
+      analytics.queue.ts
+    schemas/
+      api.schemas.ts
+    utils/
+  tests/
+    integration/
+    unit/
+  package.json
+  tsconfig.json
+```
+
+## 4. Judge worker
+
+```text
+apps/judge-worker/
+  src/
+    index.ts
+    config/
+    sandbox/
+      docker-runner.ts
+      firecracker-runner.ts
+      resource-limits.ts
+    languages/
+      javascript.ts
+      python.ts
+      java.ts
+    judge/
+      judge-job.processor.ts
+      test-runner.ts
+      verdict.ts
+    clients/
+      api-client.ts
+      object-storage-client.ts
+  tests/
+  package.json
+```
+
+## 5. AI worker
+
+```text
+apps/ai-worker/
+  src/
+    index.ts
+    retrieval/
+      embed-content.ts
+      vector-search.ts
+    tutor/
+      tutor-job.processor.ts
+      guardrails.ts
+      prompts.ts
+    providers/
+      openai.ts
+      anthropic.ts
+    telemetry/
+  package.json
+```
+
+## 6. Shared packages
+
+```text
+packages/shared/
+  src/
+    constants/
+    types/
+    schemas/
+    api/
+    dsa/
+      topics.ts
+      difficulties.ts
+      verdicts.ts
+
+packages/ui/
+  src/
+    Button.tsx
+    Card.tsx
+    Dialog.tsx
+    ProgressRing.tsx
+    CodeBlock.tsx
+
+packages/config/
+  eslint/
+  typescript/
+  prettier/
+```
+
+## 7. PostgreSQL database
+
+```text
+database/
+  migrations/
+    0001_extensions.sql
+    0002_enums.sql
+    0003_users.sql
+    0004_curriculum.sql
+    0005_problems.sql
+    0006_progress.sql
+    0007_assessments_badges.sql
+    0008_ai_analytics.sql
+  seeds/
+    001_topics.sql
+    002_lessons.sql
+    003_problems.sql
+    004_badges.sql
+  fixtures/
+    sample-users.json
+    sample-submissions.json
+  functions/
+    update_timestamp.sql
+    leaderboard_snapshot.sql
+  README.md
+```
