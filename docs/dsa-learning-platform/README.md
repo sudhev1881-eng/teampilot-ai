@@ -17,6 +17,10 @@ Implementation-ready documentation package for a Data Structures and Algorithms 
 | [09-dsa-topic-guide.md](09-dsa-topic-guide.md) | Topic definitions, use cases, complexity notes, interview questions, and examples. |
 | [10-diagrams.md](10-diagrams.md) | Mermaid architecture and learning flow diagrams. |
 | [11-technology-stack.md](11-technology-stack.md) | Recommended frontend, backend, database, cloud, auth, and AI stack. |
+| [12-dsa-platform-structure-pdf.md](12-dsa-platform-structure-pdf.md) | PDF-ready source for the DSA platform product and system structure handout. |
+| [13-college-dsa-class-guide-pdf.md](13-college-dsa-class-guide-pdf.md) | PDF-ready source for a college CS DSA class guide. |
+| [12-dsa-platform-structure-pdf.pdf](12-dsa-platform-structure-pdf.pdf) | Generated PDF: DSA platform product and system structure. |
+| [13-college-dsa-class-guide-pdf.pdf](13-college-dsa-class-guide-pdf.pdf) | Generated PDF: college CS DSA class guide. |
 
 ## Recommended implementation order
 
