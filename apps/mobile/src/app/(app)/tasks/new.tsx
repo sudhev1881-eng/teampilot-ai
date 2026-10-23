@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { AppText, Button, Chip, ErrorState, Screen, TextField } from '@/components/ui';
 import { useLocations } from '@/features/org/api';
-import { useActiveOrgId } from '@/features/org/OrgProvider';
+import { useActiveOrgId, useOrg } from '@/features/org/OrgProvider';
 import { useCreateTask } from '@/features/work/api';
 import { parseLocalInput } from '@/features/work/format';
 import { errorMessage } from '@/lib/api';
@@ -26,6 +26,14 @@ const formSchema = z.object({
 type Form = z.infer<typeof formSchema>;
 
 export default function NewTask() {
+  const { isManager } = useOrg();
+
+  if (!isManager) return <Screen><ErrorState message="Manager access is required to create tasks." /></Screen>;
+
+  return <NewTaskForm />;
+}
+
+function NewTaskForm() {
   const orgId = useActiveOrgId();
   const { eventId } = useLocalSearchParams<{ eventId?: string }>();
   const { spacing } = useTheme();

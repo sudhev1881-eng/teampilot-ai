@@ -9,12 +9,17 @@ import { errorMessage } from '@/lib/api';
 import { useTheme } from '@/theme';
 
 export default function RosterScreen() {
-  const orgId = useActiveOrgId();
   const { isManager } = useOrg();
-  const { spacing } = useTheme();
-  const roster = useRoster(orgId);
 
   if (!isManager) return <Screen><ErrorState message="Manager access is required for the roster." /></Screen>;
+
+  return <RosterContent />;
+}
+
+function RosterContent() {
+  const orgId = useActiveOrgId();
+  const { spacing } = useTheme();
+  const roster = useRoster(orgId);
 
   return (
     <Screen refreshing={roster.isRefetching} onRefresh={() => void roster.refetch()}>

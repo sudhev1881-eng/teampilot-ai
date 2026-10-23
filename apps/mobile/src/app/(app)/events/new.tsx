@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { AppText, Button, Chip, ErrorState, Screen, TextField } from '@/components/ui';
 import { useLocations } from '@/features/org/api';
-import { useActiveOrgId } from '@/features/org/OrgProvider';
+import { useActiveOrgId, useOrg } from '@/features/org/OrgProvider';
 import { useCreateEvent } from '@/features/work/api';
 import { deviceTimeZone, parseLocalInput, toLocalInput } from '@/features/work/format';
 import { errorMessage } from '@/lib/api';
@@ -30,6 +30,14 @@ function defaultTimes() {
 }
 
 export default function NewEvent() {
+  const { isManager } = useOrg();
+
+  if (!isManager) return <Screen><ErrorState message="Manager access is required to create events." /></Screen>;
+
+  return <NewEventForm />;
+}
+
+function NewEventForm() {
   const orgId = useActiveOrgId();
   const { spacing } = useTheme();
   const create = useCreateEvent(orgId);

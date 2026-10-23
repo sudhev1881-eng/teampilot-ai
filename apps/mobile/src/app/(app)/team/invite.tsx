@@ -15,6 +15,14 @@ import { useTheme } from '@/theme';
 type FormInput = z.input<typeof createInvitationSchema>;
 
 export default function InviteMember() {
+  const { isAdmin } = useOrg();
+
+  if (!isAdmin) return <Screen><ErrorState message="Admin access is required to invite members." /></Screen>;
+
+  return <InviteMemberForm />;
+}
+
+function InviteMemberForm() {
   const orgId = useActiveOrgId();
   const { role } = useOrg();
   const { spacing } = useTheme();
