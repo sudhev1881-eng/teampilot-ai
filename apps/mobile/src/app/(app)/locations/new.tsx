@@ -5,13 +5,21 @@ import { createLocationSchema } from '@teampilot/shared';
 import { z } from 'zod';
 import { Button, ErrorState, Screen, TextField } from '@/components/ui';
 import { useCreateLocation } from '@/features/org/api';
-import { useActiveOrgId } from '@/features/org/OrgProvider';
+import { useActiveOrgId, useOrg } from '@/features/org/OrgProvider';
 import { errorMessage } from '@/lib/api';
 
 const formSchema = createLocationSchema.pick({ name: true, description: true });
 type Form = z.input<typeof formSchema>;
 
 export default function NewLocation() {
+  const { isManager } = useOrg();
+
+  if (!isManager) return <Screen><ErrorState message="Manager access is required to add locations." /></Screen>;
+
+  return <NewLocationForm />;
+}
+
+function NewLocationForm() {
   const orgId = useActiveOrgId();
   const create = useCreateLocation(orgId);
   const { control, handleSubmit } = useForm<Form, unknown, z.output<typeof formSchema>>({
